@@ -1,0 +1,14 @@
+{
+  "name": "vehicle-rental-graph-intelligence",
+  "version": "1.0.0",
+  "description": "Neo4j-first Vehicle Rental Graph Intelligence System for DBMS DA3",
+  "private": true,
+  "scripts": {
+    "server:dev": "npm run dev --prefix server",
+    "server:build": "npm run build --prefix server",
+    "client:dev": "npm run dev --prefix client",
+    "client:build": "npm run build --prefix client",
+    "db:expand": "npm run seed:expand --prefix server",
+    "db:audit": "npm run audit --prefix server"
+  }
+}

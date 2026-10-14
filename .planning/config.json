@@ -1,0 +1,10 @@
+{
+  "mode": "interactive",
+  "version": "1.0.0",
+  "tech_stack": {
+    "frontend": "React, Vite, TypeScript, Tailwind CSS",
+    "backend": "Node.js, Express, TypeScript",
+    "database": "Neo4j AuraDB Free",
+    "driver": "neo4j-driver"
+  }
+}

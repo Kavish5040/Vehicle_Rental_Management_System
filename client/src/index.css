@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Custom Warm Design Tokens */
+  --color-warm-bg: #F7F5EF;
+  --color-warm-surface: #FFFDF8;
+  --color-warm-subtle: #EEE9DE;
+  --color-warm-card: #FFFFFF;
+  --color-warm-text: #262B27;
+  --color-warm-muted: #74776F;
+  --color-warm-border: #E4DFD4;
+  --color-warm-border-subtle: #ECE7DD;
+
+  /* Forest & Sage Accents */
+  --color-forest: #426B52;
+  --color-forest-dark: #31523E;
+  --color-forest-light: #528365;
+  --color-sage: #DCE6D9;
+  --color-sage-light: #F0F5EE;
+  --color-sage-border: #C8D8C4;
+
+  /* Restrained Functional Status Tokens */
+  --color-status-success-bg: #EBF3EE;
+  --color-status-success-text: #2D6A4F;
+  --color-status-success-border: #C3DCCB;
+
+  --color-status-amber-bg: #FEF3C7;
+  --color-status-amber-text: #B45309;
+  --color-status-amber-border: #FDE68A;
+
+  --color-status-error-bg: #FEE2E2;
+  --color-status-error-text: #991B1B;
+  --color-status-error-border: #FECACA;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-warm-border);
+  }
+
+  body {
+    background-color: var(--color-warm-bg);
+    color: var(--color-warm-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom subtle scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #D5CEBE;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #BCB3A0;
+  }
+}
