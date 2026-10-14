@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import type { HealthStatus, DatabaseOverview, CoreLabel } from './types';
 import { ENTITY_STYLES, CORE_LABELS } from './theme';
+import { apiFetch } from './api';
 import { GraphExplorerView } from './components/GraphExplorerView';
 import { CypherLabView } from './components/CypherLabView';
 import { SmartAvailabilityView } from './components/SmartAvailabilityView';
@@ -39,15 +40,13 @@ export default function App() {
     try {
       setApiError(null);
       // 1. Health check
-      const healthRes = await fetch('/api/health');
-      const healthData = await healthRes.json();
+      const { ok: healthOk, data: healthData } = await apiFetch<HealthStatus>('/api/health');
       setHealth(healthData);
 
       // 2. Database Overview stats
-      if (healthRes.ok && healthData.status === 'connected') {
-        const ovRes = await fetch('/api/overview');
-        const ovData = await ovRes.json();
-        if (ovData.success) {
+      if (healthOk && healthData.status === 'connected') {
+        const { data: ovData } = await apiFetch<{ success: boolean; data?: DatabaseOverview; error?: string }>('/api/overview');
+        if (ovData.success && ovData.data) {
           setOverview(ovData.data);
         } else {
           setApiError(ovData.error || 'Failed to fetch database overview');
@@ -56,7 +55,7 @@ export default function App() {
         setOverview(null);
       }
     } catch (err: any) {
-      setApiError(err?.message || 'Unable to connect to backend server on port 5000');
+      setApiError(err?.message || 'Unable to connect to backend server');
       setHealth(null);
       setOverview(null);
     } finally {

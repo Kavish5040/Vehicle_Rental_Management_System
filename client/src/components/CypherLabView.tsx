@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { CuratedQueryDefinition, QueryExecutionResult } from '../types';
+import { apiFetch } from '../api';
 import {
   Code2,
   Play,
@@ -29,8 +30,7 @@ export const CypherLabView: React.FC = () => {
     try {
       setLoadingList(true);
       setError(null);
-      const res = await fetch('/api/lab/queries');
-      const data = await res.json();
+      const { data } = await apiFetch<{ success: boolean; data: CuratedQueryDefinition[]; error?: string }>('/api/lab/queries');
       if (data.success) {
         setQueries(data.data);
       } else {
@@ -48,12 +48,11 @@ export const CypherLabView: React.FC = () => {
     try {
       setExecuting(true);
       setError(null);
-      const res = await fetch('/api/lab/execute', {
+      const { data } = await apiFetch<{ success: boolean; data: QueryExecutionResult; error?: string }>('/api/lab/execute', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ queryId }),
       });
-      const data = await res.json();
       if (data.success) {
         setResult(data.data);
       } else {
